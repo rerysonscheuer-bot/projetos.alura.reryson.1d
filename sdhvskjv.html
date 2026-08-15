@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Instrumentos</title>
     <style>
-        /* Paleta de Cores Premium - Marrom Musical */
+        /* Paleta de Cores - Marrom Musical */
         :root {
             --fundo: #fcfaf7;
             --texto: #2c1d11;
             --cartao: #ffffff;
             --borda-cartao: #e8ded1;
-            --marrom-principal: #5c4033; /* Marrom Ébano/Mogno */
+            --marrom-principal: #5c4033;
             --marrom-claro: #8b5a2b;
             --botao-som: #8b5a2b;
-            --botao-fala: #b38b6d;
             --sombra: rgba(92, 64, 51, 0.08);
+            --brilho-dourado: rgba(212, 175, 55, 0.6); /* Dourado Clássico */
         }
 
         /* Tema Escuro - Marrom Profundo */
@@ -27,8 +27,8 @@
             --marrom-principal: #8b5a2b;
             --marrom-claro: #cf9f74;
             --botao-som: #cf9f74;
-            --botao-fala: #8b5a2b;
             --sombra: rgba(0, 0, 0, 0.4);
+            --brilho-dourado: rgba(255, 215, 0, 0.8); /* Dourado Vibrante para o Escuro */
         }
 
         body {
@@ -41,7 +41,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Botão de Alternar Tema Superior */
+        /* Botão de Alternar Tema */
         .btn-alternar {
             padding: 12px 24px;
             cursor: pointer;
@@ -58,9 +58,10 @@
             background-color: var(--marrom-principal);
             color: var(--fundo);
             transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--brilho-dourado);
         }
 
-        /* Banner Marrom Musical */
+        /* Banner Marrom */
         .retangulo-marrom {
             background-color: var(--marrom-principal);
             color: #fdfbf7;
@@ -69,7 +70,6 @@
             max-width: 850px;
             border-radius: 16px;
             box-shadow: 0 10px 25px var(--sombra);
-            transition: background-color 0.4s ease;
         }
         .retangulo-marrom h1 {
             margin-top: 0;
@@ -84,7 +84,7 @@
             margin: 0 auto;
         }
 
-        /* Grid Organizadora */
+        /* Grid */
         .grade {
             display: flex;
             flex-wrap: wrap;
@@ -94,7 +94,7 @@
             margin: 0 auto;
         }
 
-        /* Cards Estilizados dos Instrumentos */
+        /* Cards dos Instrumentos com Efeito de Brilho */
         .bloco {
             background-color: var(--cartao);
             border: 1px solid var(--borda-cartao);
@@ -102,14 +102,24 @@
             padding: 20px;
             border-radius: 14px;
             box-shadow: 0 8px 16px var(--sombra);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                        box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                        border-color 0.3s ease,
+                        background-color 0.4s ease;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* Efeito Hover do Card (Brilho e Elevação) */
         .bloco:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(92, 64, 51, 0.15);
+            transform: translateY(-8px);
+            border-color: var(--brilho-dourado);
+            box-shadow: 0 14px 28px rgba(92, 64, 51, 0.12), 
+                        0 0 20px var(--brilho-dourado);
         }
+
         .bloco img {
             width: 100%;
             height: 180px;
@@ -120,7 +130,15 @@
             font-size: 22px;
             margin: 15px 0 10px 0;
             color: var(--marrom-claro);
+            transition: color 0.3s ease;
         }
+        
+        /* Destaque dourado no título do instrumento ao passar o mouse */
+        .bloco:hover h3 {
+            color: var(--marrom-principal);
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        }
+
         .bloco p {
             font-size: 14px;
             line-height: 1.5;
@@ -129,39 +147,28 @@
             opacity: 0.85;
         }
 
-        /* Área de Botões dos Cards */
+        /* Botão de Ação */
         .botoes-acao {
             display: flex;
-            gap: 12px;
             justify-content: center;
         }
-        .botoes-acao button {
-            padding: 10px 14px;
+        .btn-som {
+            padding: 10px 24px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             color: #ffffff;
             font-weight: 600;
-            flex: 1;
-            font-size: 13px;
-            transition: opacity 0.2s ease, transform 0.1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .btn-som {
+            font-size: 14px;
             background-color: var(--botao-som);
+            width: 100%;
+            transition: all 0.2s ease;
         }
-        .btn-fala {
-            background-color: var(--botao-fala);
-            color: var(--cartao) !important;
-            border: 1px solid var(--marrom-claro) !important;
+        .btn-som:hover {
+            opacity: 0.95;
+            box-shadow: 0 0 10px var(--brilho-dourado);
         }
-        .botoes-acao button:hover {
-            opacity: 0.9;
-        }
-        .botoes-acao button:active {
+        .btn-som:active {
             transform: scale(0.97);
         }
     </style>
@@ -171,10 +178,10 @@
     <!-- Botão de alternar tema -->
     <button class="btn-alternar" onclick="mudarVersao()">🌓 Alternar Aparência</button>
 
-    <!-- Banner Principal Renovado -->
+    <!-- Banner Principal -->
     <div class="retangulo-marrom">
         <h1>Galeria Interativa de Instrumentos</h1>
-        <p>Explore a beleza e a história da música. Os instrumentos são extensões da alma artística humana, divididos em famílias tradicionais. Clique nos botões para ouvir arranjos sintetizados ou escutar a audiodescrição de cada um.</p>
+        <p>Explore a beleza e a história da música. Os instrumentos são extensões da alma artística humana, divididos em famílias tradicionais. Clique nos botões para interagir.</p>
     </div>
 
     <!-- Grid de Conteúdo -->
@@ -185,7 +192,6 @@
             <p>Instrumento de sopro feito de metal, conhecido por seu som forte, imponente e agudo.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('trompete')">🎵 Som</button>
-                <button class="btn-fala" onclick="falarTexto('Trompete. Instrumento de sopro feito de metal, conhecido por seu som forte e agudo.')">🔊 Falar</button>
             </div>
         </div>
 
@@ -195,17 +201,15 @@
             <p>Tambor ancestral de percussão muito valorizado em ritmos brasileiros e africanos.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('atabaque')">🎵 Som</button>
-                <button class="btn-fala" onclick="falarTexto('Atabaque. Tambor de percussão muito usado em ritmos brasileiros e africanos.')">🔊 Falar</button>
             </div>
         </div>
 
         <div class="bloco">
             <img src="https://unsplash.com" alt="Flauta">
             <h3>Flauta</h3>
-            <p>Instrumento de sopro antigo que produz melodias suaves através do fluxo de ar controlado.</p>
+            <p>Instrumento de sopro antigo que Unicode produz melodias suaves através do fluxo de ar controlado.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('flauta')">🎵 Som</button>
-                <button class="btn-fala" onclick="falarTexto('Flauta. Instrumento de sopro antigo que produz um som suave através do ar.')">🔊 Falar</button>
             </div>
         </div>
 
@@ -215,7 +219,6 @@
             <p>Instrumento clássico de 6 cordas dedilhadas, sendo um dos mais populares e versáteis do mundo.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('violao')">🎵 Som</button>
-                <button class="btn-fala" onclick="falarTexto('Violão. Instrumento clássico de seis cordas dedilhadas, muito popular no mundo todo.')">🔊 Falar</button>
             </div>
         </div>
 
@@ -225,7 +228,6 @@
             <p>Conjunto complexo de tambores e pratos metálicos responsáveis pelo ritmo e tempo musical.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('bateria')">🎵 Som</button>
-                <button class="btn-fala" onclick="falarTexto('Bateria. Conjunto de tambores e pratos que dão o ritmo e o tempo da música.')">🔊 Falar</button>
             </div>
         </div>
 
@@ -235,7 +237,6 @@
             <p>Instrumento de metal com palheta, portador de um som expressivo muito marcante no Jazz.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('saxofone')">🎵 Som</button>
-                <button class="btn-fala" onclick="falarTexto('Saxofone. Instrumento de metal com som expressivo, muito marcante no Jazz.')">🔊 Falar</button>
             </div>
         </div>
 
@@ -245,14 +246,24 @@
             <p>Fiel representante das cordas friccionadas, famoso por suas notas graves e profundas.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('violoncelo')">🎵 Som</button>
-                <button class="btn-fala" onclick="falarTexto('Violoncelo. Instrumento de cordas grande que toca notas graves e profundas.')">🔊 Falar</button>
             </div>
         </div>
     </div>
 
-    <!-- Scripts de Controle de Estado e Eventos -->
+    <!-- Scripts -->
     <script>
-        let contextoAudio = null;
-
-        // Função corrigida para alternar temas de forma segura
         function mudarVersao() {
+            const body = document.body;
+            if (body.getAttribute("data-tema") === "escuro") {
+                body.removeAttribute("data-tema");
+            } else {
+                body.setAttribute("data-tema", "escuro");
+            }
+        }
+
+        function tocarSom(instrumento) {
+            console.log("Botão de som pressionado para:", instrumento);
+        }
+    </script>
+</body>
+</html>
