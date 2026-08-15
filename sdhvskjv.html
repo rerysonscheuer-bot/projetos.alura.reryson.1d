@@ -1,11 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meus Instrumentos</title>
+    <style>
+        /* Cores da Versão Clara (Fundo Branco) */
+        :root {
+            --fundo: #ffffff;
+            --texto: #000000;
+            --cartao: #f0f0f0;
+        }
+        /* Cores da Versão Preta (Tema Escuro) */
+        [data-tema="escuro"] {
+            --fundo: #000000;
+            --texto: #ffffff;
+            --cartao: #222222;
+        }
+        body {
+            background-color: var(--fundo);
+            color: var(--texto);
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .retangulo-azul {
+            background-color: #add8e6; /* Azul Claro */
+            color: #000000;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+        .grade {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .bloco {
+            background-color: var(--cartao);
+            width: 250px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .bloco img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    
+
+    <!-- Botão de alternar versão -->
+    <button onclick="mudarVersao()">Mudar Versão (Clara/Preta)</button>
+
+    <!-- Retângulo Azul com Explicação -->
+    <div class="retangulo-azul">
+        <h1>Instrumentos</h1>
+        <p>Bem-vindo! Instrumentos musicais são objetos criados para produzir sons e fazer música. Eles se dividem em famílias como sopro, cordas e percussão. Abaixo você pode conhecer um pouco mais sobre seis deles e suas características principais.</p>
+    </div>
+
+    <!-- Lista com os 6 Instrumentos -->
+    <div class="grade">
+        <div class="bloco">
+            <img src="https://picsum.photos" alt="Trompete">
+            <h3>Trompete</h3>
+            <p>Instrumento de sopro feito de metal, conhecido por seu som forte e agudo.</p>
+        </div>
+        <div class="bloco">
+            <img src="https://picsum.photos" alt="Atabaque">
+            <h3>Atabaque</h3>
+            <p>Tambor de percussão muito usado em ritmos brasileiros e africanos.</p>
+        </div>
+        <div class="bloco">
+            <img src="https://picsum.photos" alt="Flauta">
+            <h3>Flauta</h3>
+            <p>Instrumento de sopro antigo que produz um som suave através do ar.</p>
+        </div>
+        <div class="bloco">
+            <img src="https://picsum.photos" alt="Violão">
+            <h3>Violão</h3>
+            <p>Instrumento clássico de 6 cordas dedilhadas, muito popular no mundo todo.</p>
+        </div>
+        <div class="bloco">
+            <img src="https://picsum.photos" alt="Bateria">
+            <h3>Bateria</h3>
+            <p>Conjunto de tambores e pratos que dão o ritmo e o tempo da música.</p>
+        </div>
+        <div class="bloco">
+            <img src="https://picsum.photos" alt="Saxofone">
+            <h3>Saxofone</h3>
+            <p>Instrumento de metal com som expressivo, muito marcante no Jazz.</p>
+        </div>
+        <div class="bloco">
+            <img src="https://picsum.photos" alt="Violoncelo">
+            <h3>Violoncelo</h3>
+            <p>Instrumento de cordas grande que toca notas graves e profundas.</p>
+        </div>
+    </div>
+
+    <!-- Script Simples de Troca de Tema -->
+    <script>
+        function mudarVersao() {
+            const body = document.body;
+            if (body.getAttribute("data-tema") === "escuro") {
+                body.removeAttribute("data-tema");
+            } else {
+                body.setAttribute("data-tema", "escuro");
+            }
+        }
+    </script>
+
 </body>
 </html>
+
