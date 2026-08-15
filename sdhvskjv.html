@@ -28,7 +28,7 @@
             --marrom-claro: #cf9f74;
             --botao-som: #cf9f74;
             --sombra: rgba(0, 0, 0, 0.4);
-            --brilho-dourado: rgba(255, 215, 0, 0.8); /* Dourado Vibrante para o Escuro */
+            --brilho-dourado: rgba(255, 215, 0, 0.8); /* Dourado Vibrante */
         }
 
         body {
@@ -84,7 +84,7 @@
             margin: 0 auto;
         }
 
-        /* Grid */
+        /* Grid Organizadora */
         .grade {
             display: flex;
             flex-wrap: wrap;
@@ -133,7 +133,7 @@
             transition: color 0.3s ease;
         }
         
-        /* Destaque dourado no título do instrumento ao passar o mouse */
+        /* Destaque dourado no título ao passar o mouse */
         .bloco:hover h3 {
             color: var(--marrom-principal);
             text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
@@ -187,7 +187,7 @@
     <!-- Grid de Conteúdo -->
     <div class="grade">
         <div class="bloco">
-            <img src="https://unsplash.com" alt="Trompete">
+            <img src="https://gstatic.com" alt="Trompete">
             <h3>Trompete</h3>
             <p>Instrumento de sopro feito de metal, conhecido por seu som forte, imponente e agudo.</p>
             <div class="botoes-acao">
@@ -196,7 +196,7 @@
         </div>
 
         <div class="bloco">
-            <img src="https://unsplash.com" alt="Atabaque">
+            <img src="https://gstatic.com" alt="Atabaque">
             <h3>Atabaque</h3>
             <p>Tambor ancestral de percussão muito valorizado em ritmos brasileiros e africanos.</p>
             <div class="botoes-acao">
@@ -205,16 +205,16 @@
         </div>
 
         <div class="bloco">
-            <img src="https://unsplash.com" alt="Flauta">
+            <img src="https://gstatic.com" alt="Flauta">
             <h3>Flauta</h3>
-            <p>Instrumento de sopro antigo que Unicode produz melodias suaves através do fluxo de ar controlado.</p>
+            <p>Instrumento de sopro antigo que produz melodias suaves através do fluxo de ar controlado.</p>
             <div class="botoes-acao">
                 <button class="btn-som" onclick="tocarSom('flauta')">🎵 Som</button>
             </div>
         </div>
 
         <div class="bloco">
-            <img src="https://unsplash.com" alt="Violão">
+            <img src="https://gstatic.com" alt="Violão">
             <h3>Violão</h3>
             <p>Instrumento clássico de 6 cordas dedilhadas, sendo um dos mais populares e versáteis do mundo.</p>
             <div class="botoes-acao">
@@ -223,7 +223,7 @@
         </div>
 
         <div class="bloco">
-            <img src="https://unsplash.com" alt="Bateria">
+            <img src="https://gstatic.com" alt="Bateria">
             <h3>Bateria</h3>
             <p>Conjunto complexo de tambores e pratos metálicos responsáveis pelo ritmo e tempo musical.</p>
             <div class="botoes-acao">
@@ -232,38 +232,3 @@
         </div>
 
         <div class="bloco">
-            <img src="https://unsplash.com" alt="Saxofone">
-            <h3>Saxofone</h3>
-            <p>Instrumento de metal com palheta, portador de um som expressivo muito marcante no Jazz.</p>
-            <div class="botoes-acao">
-                <button class="btn-som" onclick="tocarSom('saxofone')">🎵 Som</button>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <img src="https://unsplash.com" alt="Violoncelo">
-            <h3>Violoncelo</h3>
-            <p>Fiel representante das cordas friccionadas, famoso por suas notas graves e profundas.</p>
-            <div class="botoes-acao">
-                <button class="btn-som" onclick="tocarSom('violoncelo')">🎵 Som</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script>
-        function mudarVersao() {
-            const body = document.body;
-            if (body.getAttribute("data-tema") === "escuro") {
-                body.removeAttribute("data-tema");
-            } else {
-                body.setAttribute("data-tema", "escuro");
-            }
-        }
-
-        function tocarSom(instrumento) {
-            console.log("Botão de som pressionado para:", instrumento);
-        }
-    </script>
-</body>
-</html>
