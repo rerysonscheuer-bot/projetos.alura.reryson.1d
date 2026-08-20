@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria Musical</title>
+    <title>Galeria Musical Completa</title>
     <style>
         /* Variáveis de Cor - Tema Claro (Padrão) */
         :root {
@@ -88,7 +88,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            max-width: 1100px;
+            max-width: 1200px;
             width: 100%;
         }
 
@@ -167,12 +167,20 @@
     </header>
 
     <main class="vitrine">
-        <!-- Violão -->
+        <!-- Trompete -->
         <div class="instrumento-card">
-            <img src="https://unsplash.com" alt="Violão">
-            <h2>Violão</h2>
-            <p>Um clássico de cordas dedilhadas, essencial na MPB, no rock e em ritmos do mundo inteiro.</p>
-            <button class="botao-audio" onclick="tocarNota('violao')">🔊 Ouvir Som</button>
+            <img src="https://unsplash.com" alt="Trompete">
+            <h2>Trompete</h2>
+            <p>Instrumento de sopro feito de metal, conhecido por seu som forte, imponente e agudo.</p>
+            <button class="botao-audio" onclick="tocarNota('trompete')">🔊 Ouvir Som</button>
+        </div>
+
+        <!-- Atabaque -->
+        <div class="instrumento-card">
+            <img src="https://unsplash.com" alt="Atabaque">
+            <h2>Atabaque</h2>
+            <p>Tambor ancestral de percussão muito valorizado em ritmos brasileiros e africanos.</p>
+            <button class="botao-audio" onclick="tocarNota('atabaque')">🔊 Ouvir Som</button>
         </div>
 
         <!-- Flauta -->
@@ -181,6 +189,14 @@
             <h2>Flauta</h2>
             <p>Instrumento de sopro milenar que cria melodias suaves e aéreas através do ar.</p>
             <button class="botao-audio" onclick="tocarNota('flauta')">🔊 Ouvir Som</button>
+        </div>
+
+        <!-- Violão -->
+        <div class="instrumento-card">
+            <img src="https://unsplash.com" alt="Violão">
+            <h2>Violão</h2>
+            <p>Um clássico de cordas dedilhadas, essencial na MPB, no rock e em ritmos do mundo inteiro.</p>
+            <button class="botao-audio" onclick="tocarNota('violao')">🔊 Ouvir Som</button>
         </div>
 
         <!-- Bateria -->
@@ -193,7 +209,7 @@
     </main>
 
     <script>
-        // FUNÇÃO DO TEMA: Liga e desliga a classe 'tema-escuro' na tag <body> a cada clique
+        // FUNÇÃO DO TEMA: Liga e desliga a classe 'tema-escuro' no <body> a cada clique
         function alternarTema() {
             document.body.classList.toggle('tema-escuro');
         }
@@ -217,14 +233,22 @@
 
                 const agora = audioCtx.currentTime;
 
-                if (tipo === 'violao') {
-                    oscilador.type = 'triangle';
-                    oscilador.frequency.setValueAtTime(146.83, agora); // Nota Ré grave
-                    volume.gain.setValueAtTime(0.3, agora);
-                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.8);
+                if (tipo === 'trompete') {
+                    oscilador.type = 'sawtooth';
+                    oscilador.frequency.setValueAtTime(440, agora); // Nota Lá (A4)
+                    volume.gain.setValueAtTime(0.08, agora);
+                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.5);
                     oscilador.start(agora);
-                    oscilador.stop(agora + 0.8);
-                } 
+                    oscilador.stop(agora + 0.5);
+                }
+                else if (tipo === 'atabaque') {
+                    oscilador.type = 'sine';
+                    oscilador.frequency.setValueAtTime(85, agora); // Som grave e percussivo
+                    volume.gain.setValueAtTime(0.5, agora);
+                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.25);
+                    oscilador.start(agora);
+                    oscilador.stop(agora + 0.25);
+                }
                 else if (tipo === 'flauta') {
                     oscilador.type = 'sine';
                     oscilador.frequency.setValueAtTime(783.99, agora); // Nota Sol aguda e pura
@@ -232,21 +256,20 @@
                     volume.gain.exponentialRampToValueAtTime(0.001, agora + 1.0);
                     oscilador.start(agora);
                     oscilador.stop(agora + 1.0);
+                }
+                else if (tipo === 'violao') {
+                    oscilador.type = 'triangle';
+                    oscilador.frequency.setValueAtTime(146.83, agora); // Nota Ré grave
+                    volume.gain.setValueAtTime(0.3, agora);
+                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.8);
+                    oscilador.start(agora);
+                    oscilador.stop(agora + 0.8);
                 } 
                 else if (tipo === 'bateria') {
                     oscilador.type = 'square';
-                    oscilador.frequency.setValueAtTime(130, agora); // Impacto percussivo rápido
+                    oscilador.frequency.setValueAtTime(130, agora); // Impacto rápido
                     oscilador.frequency.exponentialRampToValueAtTime(10, agora + 0.1);
                     volume.gain.setValueAtTime(0.4, agora);
                     volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.12);
-                    oscilador.start(agora);
-                    oscilador.stop(agora + 0.12);
-                }
-            } catch (erro) {
-                console.warn("Erro ao iniciar o áudio de síntese nativo do navegador:", erro);
-            }
-        }
-    </script>
-</body>
-</html>
 
+                
