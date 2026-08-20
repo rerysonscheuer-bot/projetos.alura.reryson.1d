@@ -232,44 +232,49 @@
         </div>
     </div>
 
-    <!-- Scripts de Interatividade -->
+    <!-- Scripts de Interatividade Corrigidos -->
     <script>
-        // Função para alternar o tema claro e escuro
+        // CORREÇÃO: Aplica o atributo direto na tag HTML raiz (:root)
         function mudarVersao() {
-            const elementoBody = document.body;
-            const temaAtual = elementoBody.getAttribute("data-tema");
-            
-            if (temaAtual === "escuro") {
-                elementoBody.removeAttribute("data-tema");
+            const raiz = document.documentElement;
+            if (raiz.getAttribute("data-tema") === "escuro") {
+                raiz.removeAttribute("data-tema");
             } else {
-                elementoBody.setAttribute("data-tema", "escuro");
+                raiz.setAttribute("data-tema", "escuro");
             }
         }
 
-        // Função para gerar sons sintetizados nativamente pelo navegador
+        // CORREÇÃO: Sintetizador simplificado e compatível
         function tocarSom(instrumento) {
-            // Cria o contexto de áudio unificado para navegadores atuais
-            const contextoAudio = new (window.AudioContext || window.webkitAudioContext)();
-            const oscilador = contextoAudio.createOscillator();
-            const controleGanho = contextoAudio.createGain();
-            
-            oscilador.connect(controleGanho);
-            controleGanho.connect(contextoAudio.destination);
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                const agora = ctx.currentTime;
 
-            const tempoAtual = contextoAudio.currentTime;
+                if (instrumento === 'trompete') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(440, agora);
+                    gain.gain.setValueAtTime(0.1, agora);
+                    gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.5);
+                    osc.start(agora);
+                    osc.stop(agora + 0.5);
+                } 
+                else if (instrumento === 'atabaque') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(90, agora);
+                    gain.gain.setValueAtTime(0.4, agora);
+                    gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.3);
+                    osc.start(agora);
+                    osc.stop(agora + 0.3);
+                } 
+                else if (instrumento === 'flauta') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(784, agora);
+                    gain.gain.setValueAtTime(0.15, agora);
 
-            // Configurações acústicas baseadas em síntese para cada instrumento
-            if (instrumento === 'trompete') {
-                oscilador.type = 'sawtooth';
-                oscilador.frequency.setValueAtTime(440, tempoAtual); // Nota Lá (A4)
-                controleGanho.gain.setValueAtTime(0.12, tempoAtual);
-                controleGanho.gain.exponentialRampToValueAtTime(0.001, tempoAtual + 0.6);
-                oscilador.start(tempoAtual);
-                oscilador.stop(tempoAtual + 0.6);
-            } 
-            else if (instrumento === 'atabaque') {
-                oscilador.type = 'sine';
-                oscilador.frequency.setValueAtTime(90, tempoAtual); // Frequência bem grave
-                controleGanho.gain.setValueAtTime(0.4, tempoAtual);
-                controleGanho.gain.exponentialRampToValueAtTime(0.001, tempoAtual + 0.3);
-                oscilador.start(tempoAtual);
+                
