@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Instrumentos</title>
     <style>
-        /* Paleta de Cores - Marrom Musical */
+        /* Paleta de Cores - Tema Claro por Padrão */
         :root {
             --fundo: #fcfaf7;
             --texto: #2c1d11;
@@ -18,8 +18,8 @@
             --brilho-dourado: rgba(212, 175, 55, 0.6); /* Dourado Clássico */
         }
 
-        /* Tema Escuro - Marrom Profundo */
-        [data-tema="escuro"] {
+        /* CORREÇÃO DO CSS: Seletor correto para sobrescrever o :root */
+        html[data-tema="escuro"] {
             --fundo: #140e0a;
             --texto: #f5ede4;
             --cartao: #1c140f;
@@ -232,9 +232,9 @@
         </div>
     </div>
 
-    <!-- Scripts de Interatividade Corrigidos -->
+    <!-- Scripts de Interatividade -->
     <script>
-        // CORREÇÃO: Aplica o atributo direto na tag HTML raiz (:root)
+        // CORREÇÃO: Aplica diretamente na tag raiz HTML
         function mudarVersao() {
             const raiz = document.documentElement;
             if (raiz.getAttribute("data-tema") === "escuro") {
@@ -244,11 +244,17 @@
             }
         }
 
-        // CORREÇÃO: Sintetizador simplificado e compatível
+        // CORREÇÃO: Força a inicialização do contexto de áudio após o clique
         function tocarSom(instrumento) {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 const ctx = new AudioContext();
+                
+                // Desbloqueia o áudio caso o navegador tenha suspendido
+                if (ctx.state === 'suspended') {
+                    ctx.resume();
+                }
+
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 
@@ -259,22 +265,17 @@
                 if (instrumento === 'trompete') {
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(440, agora);
-                    gain.gain.setValueAtTime(0.1, agora);
-                    gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.5);
+                    gain.gain.setValueAtTime(0.08, agora);
+                    gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.4);
                     osc.start(agora);
-                    osc.stop(agora + 0.5);
+                    osc.stop(agora + 0.4);
                 } 
                 else if (instrumento === 'atabaque') {
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(90, agora);
-                    gain.gain.setValueAtTime(0.4, agora);
-                    gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.3);
+                    osc.frequency.setValueAtTime(85, agora);
+                    gain.gain.setValueAtTime(0.5, agora);
+                    gain.gain.exponentialRampToValueAtTime(0.001, agora + 0.25);
                     osc.start(agora);
-                    osc.stop(agora + 0.3);
+                    osc.stop(agora + 0.25);
                 } 
                 else if (instrumento === 'flauta') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(784, agora);
-                    gain.gain.setValueAtTime(0.15, agora);
-
-                
