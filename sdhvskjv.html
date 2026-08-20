@@ -18,7 +18,7 @@
             --brilho-dourado: rgba(212, 175, 55, 0.6); /* Dourado Clássico */
         }
 
-        /* CORREÇÃO DO CSS: Seletor correto para sobrescrever o :root */
+        /* Seletor correto para sobrescrever as variáveis no Tema Escuro */
         html[data-tema="escuro"] {
             --fundo: #140e0a;
             --texto: #f5ede4;
@@ -31,6 +31,14 @@
             --brilho-dourado: rgba(255, 215, 0, 0.8); /* Dourado Vibrante */
         }
 
+        /* Transição Suave aplicada nos elementos principais */
+        html, body, .bloco, h3, p, .retangulo-marrom, .btn-alternar {
+            transition: background-color 0.5s ease-in-out, 
+                        color 0.5s ease-in-out, 
+                        border-color 0.5s ease-in-out, 
+                        box-shadow 0.5s ease-in-out;
+        }
+
         body {
             background-color: var(--fundo);
             color: var(--texto);
@@ -38,7 +46,6 @@
             text-align: center;
             padding: 40px 20px;
             margin: 0;
-            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         /* Botão de Alternar Tema */
@@ -51,7 +58,6 @@
             background-color: transparent;
             color: var(--marrom-principal);
             font-size: 14px;
-            transition: all 0.3s ease;
             margin-bottom: 20px;
         }
         .btn-alternar:hover {
@@ -102,10 +108,6 @@
             padding: 20px;
             border-radius: 14px;
             box-shadow: 0 8px 16px var(--sombra);
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-                        box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-                        border-color 0.3s ease,
-                        background-color 0.4s ease;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -130,7 +132,6 @@
             font-size: 22px;
             margin: 15px 0 10px 0;
             color: var(--marrom-claro);
-            transition: color 0.3s ease;
         }
         
         /* Destaque dourado no título ao passar o mouse */
@@ -166,7 +167,8 @@
         }
         .btn-som:hover {
             opacity: 0.95;
-            box-shadow: 0 0 10px var(--brilho-dourado);
+            box-shadow: 0 0 12px var(--brilho-dourado);
+            transform: scale(1.02);
         }
         .btn-som:active {
             transform: scale(0.97);
@@ -234,7 +236,7 @@
 
     <!-- Scripts de Interatividade -->
     <script>
-        // CORREÇÃO: Aplica diretamente na tag raiz HTML
+        // Altera o atributo na tag raiz do HTML de forma limpa
         function mudarVersao() {
             const raiz = document.documentElement;
             if (raiz.getAttribute("data-tema") === "escuro") {
@@ -244,13 +246,13 @@
             }
         }
 
-        // CORREÇÃO: Força a inicialização do contexto de áudio após o clique
+        // Sintetizador de áudio nativo corrigido e otimizado
         function tocarSom(instrumento) {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 const ctx = new AudioContext();
                 
-                // Desbloqueia o áudio caso o navegador tenha suspendido
+                // Força o navegador a liberar o áudio após o clique
                 if (ctx.state === 'suspended') {
                     ctx.resume();
                 }
@@ -279,3 +281,5 @@
                     osc.stop(agora + 0.25);
                 } 
                 else if (instrumento === 'flauta') {
+
+            
