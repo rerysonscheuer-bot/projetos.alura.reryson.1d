@@ -7,26 +7,28 @@
     <style>
         /* Variáveis de Cor - Tema Claro (Padrão) */
         :root {
-            --cor-fundo: #fdfbf7;
-            --cor-texto: #2b1a0a;
+            --cor-fundo: #fcfaf7;
+            --cor-texto: #2c1d11;
             --cor-card: #ffffff;
-            --cor-borda: #eadaaf;
-            --cor-principal: #66462c;
-            --cor-botao: #8c5e38;
-            --sombra: rgba(102, 70, 44, 0.06);
-            --brilho: rgba(218, 165, 32, 0.5);
+            --cor-borda: #e8ded1;
+            --cor-principal: #5c4033;
+            --cor-claro: #8b5a2b;
+            --cor-botao: #8b5a2b;
+            --sombra: rgba(92, 64, 51, 0.08);
+            --brilho: rgba(212, 175, 55, 0.6); /* Dourado Clássico */
         }
 
         /* Variáveis de Cor - Tema Escuro */
         .tema-escuro {
-            --cor-fundo: #120b06;
-            --cor-texto: #f9f5f0;
-            --cor-card: #1c120a;
-            --cor-borda: #3a2514;
-            --cor-principal: #a67449;
-            --cor-botao: #c99363;
-            --sombra: rgba(0, 0, 0, 0.5);
-            --brilho: rgba(255, 215, 0, 0.7);
+            --cor-fundo: #140e0a;
+            --cor-texto: #f5ede4;
+            --cor-card: #1c140f;
+            --cor-borda: #2d1f16;
+            --cor-principal: #8b5a2b;
+            --cor-claro: #cf9f74;
+            --cor-botao: #cf9f74;
+            --sombra: rgba(0, 0, 0, 0.4);
+            --brilho: rgba(255, 215, 0, 0.8); /* Dourado Vibrante */
         }
 
         /* Estilos Globais com Transição Suave */
@@ -38,178 +40,212 @@
         body {
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
             padding: 40px 20px;
+            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Botão Interruptor de Tema */
-        .alternador-tema {
+        /* DETALHE RESTAURADO: Botão do tema com borda e destaque */
+        .btn-alternar {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 30px;
+            border: 2px solid var(--cor-principal);
             background-color: transparent;
             color: var(--cor-principal);
-            border: 2px solid var(--cor-principal);
-            padding: 12px 28px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-bottom: 30px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: inline-block;
         }
-
-        .alternador-tema:hover {
+        .btn-alternar:hover {
             background-color: var(--cor-principal);
             color: var(--cor-fundo);
+            transform: translateY(-2px);
             box-shadow: 0 0 15px var(--brilho);
         }
 
-        /* Cabeçalho */
-        header {
+        /* DETALHE RESTAURADO: Banner com o título/manchete em destaque */
+        .retangulo-marrom {
+            background-color: var(--cor-principal);
+            color: #fdfbf7;
+            padding: 40px 30px;
+            margin: 20px auto 40px auto;
+            max-width: 850px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px var(--sombra);
             text-align: center;
-            max-width: 700px;
-            margin-bottom: 40px;
         }
-
-        header h1 {
+        .retangulo-marrom h1 {
+            margin-top: 0;
             font-size: 32px;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+            color: #fdfbf7; /* Garante que o título permaneça legível no fundo marrom */
         }
-
-        header p {
+        .retangulo-marrom p {
             font-size: 16px;
-            opacity: 0.8;
             line-height: 1.6;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         /* Container dos Cards */
-        .vitrine {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        .grade {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
             max-width: 1200px;
             width: 100%;
+            margin: 0 auto;
         }
 
-        /* Card de Instrumento */
-        .instrumento-card {
+        /* Cards dos Instrumentos com Efeito de Brilho */
+        .bloco {
             background-color: var(--cor-card);
             border: 1px solid var(--cor-borda);
-            border-radius: 16px;
+            width: 280px;
             padding: 20px;
-            box-shadow: 0 8px 20px var(--sombra);
+            border-radius: 14px;
+            box-shadow: 0 8px 16px var(--sombra);
             display: flex;
             flex-direction: column;
-            align-items: center;
+            position: relative;
+            overflow: hidden;
             text-align: center;
         }
-
-        .instrumento-card:hover {
-            transform: translateY(-5px);
+        
+        .bloco:hover {
+            transform: translateY(-8px);
             border-color: var(--brilho);
-            box-shadow: 0 12px 25px var(--sombra), 0 0 15px var(--brilho);
+            box-shadow: 0 14px 28px rgba(92, 64, 51, 0.12), 
+                        0 0 20px var(--brilho);
         }
 
-        .instrumento-card img {
+        .bloco img {
             width: 100%;
             height: 180px;
             object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            border-radius: 10px;
         }
-
-        .instrumento-card h2 {
+        .bloco h3 {
             font-size: 22px;
-            margin: 10px 0;
+            margin: 15px 0 10px 0;
+            color: var(--cor-claro);
+        }
+        
+        .bloco:hover h3 {
             color: var(--cor-principal);
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
         }
 
-        .instrumento-card p {
+        .bloco p {
             font-size: 14px;
             line-height: 1.5;
-            opacity: 0.85;
-            margin-bottom: 20px;
+            margin: 0 0 20px 0;
             flex-grow: 1;
+            opacity: 0.85;
         }
 
-        /* Botão Interativo de Áudio */
-        .botao-audio {
-            background-color: var(--cor-botao);
-            color: #ffffff;
-            border: none;
-            padding: 12px 0;
+        /* Botão de Ação */
+        .botoes-acao {
+            display: flex;
+            justify-content: center;
             width: 100%;
-            font-size: 14px;
-            font-weight: bold;
+        }
+        .btn-som {
+            padding: 10px 24px;
+            border: none;
             border-radius: 8px;
             cursor: pointer;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            background-color: var(--cor-botao);
+            width: 100%;
         }
-
-        .botao-audio:hover {
-            opacity: 0.9;
+        .btn-som:hover {
+            opacity: 0.95;
             box-shadow: 0 0 10px var(--brilho);
         }
-
-        .botao-audio:active {
-            transform: scale(0.98);
+        .btn-som:active {
+            transform: scale(0.97);
         }
     </style>
 </head>
 <body>
+    
+    <!-- Botão de alternar tema funcional a cada clique -->
+    <button class="btn-alternar" onclick="alternarTema()">🌓 Alternar Aparência</button>
 
-    <!-- Botão que alterna o tema a cada clique -->
-    <button class="alternador-tema" onclick="alternarTema()">🌓 Alternar Visual</button>
+    <!-- Banner Principal com a Manchete em Destaque Colorido -->
+    <div class="retangulo-marrom">
+        <h1>Galeria Interativa de Instrumentos</h1>
+        <p>Explore a beleza e a história da música. Os instrumentos são extensões da alma artística humana, divididos em famílias tradicionais. Clique nos botões para interagir.</p>
+    </div>
 
-    <header>
-        <h1>Universo dos Instrumentos</h1>
-        <p>Explore a sonoridade e o visual de grandes clássicos da música. Clique no botão acima para alternar as aparências e interaja com os botões abaixo.</p>
-    </header>
-
-    <main class="vitrine">
+    <!-- Grid de Conteúdo -->
+    <div class="grade">
         <!-- Trompete -->
-        <div class="instrumento-card">
+        <div class="bloco">
             <img src="https://unsplash.com" alt="Trompete">
-            <h2>Trompete</h2>
+            <h3>Trompete</h3>
             <p>Instrumento de sopro feito de metal, conhecido por seu som forte, imponente e agudo.</p>
-            <button class="botao-audio" onclick="tocarNota('trompete')">🔊 Ouvir Som</button>
+            <div class="botoes-acao">
+                <button class="btn-som" onclick="tocarNota('trompete')">🎵 Som</button>
+            </div>
         </div>
 
         <!-- Atabaque -->
-        <div class="instrumento-card">
+        <div class="bloco">
             <img src="https://unsplash.com" alt="Atabaque">
-            <h2>Atabaque</h2>
+            <h3>Atabaque</h3>
             <p>Tambor ancestral de percussão muito valorizado em ritmos brasileiros e africanos.</p>
-            <button class="botao-audio" onclick="tocarNota('atabaque')">🔊 Ouvir Som</button>
+            <div class="botoes-acao">
+                <button class="btn-som" onclick="tocarNota('atabaque')">🎵 Som</button>
+            </div>
         </div>
 
         <!-- Flauta -->
-        <div class="instrumento-card">
+        <div class="bloco">
             <img src="https://unsplash.com" alt="Flauta">
-            <h2>Flauta</h2>
-            <p>Instrumento de sopro milenar que cria melodias suaves e aéreas através do ar.</p>
-            <button class="botao-audio" onclick="tocarNota('flauta')">🔊 Ouvir Som</button>
+            <h3>Flauta</h3>
+            <p>Instrumento de sopro antigo que produz melodias suaves através do fluxo de ar controlado.</p>
+            <div class="botoes-acao">
+                <button class="btn-som" onclick="tocarNota('flauta')">🎵 Som</button>
+            </div>
         </div>
 
         <!-- Violão -->
-        <div class="instrumento-card">
+        <div class="bloco">
             <img src="https://unsplash.com" alt="Violão">
-            <h2>Violão</h2>
-            <p>Um clássico de cordas dedilhadas, essencial na MPB, no rock e em ritmos do mundo inteiro.</p>
-            <button class="botao-audio" onclick="tocarNota('violao')">🔊 Ouvir Som</button>
+            <h3>Violão</h3>
+            <p>Instrumento clássico de 6 cordas dedilhadas, sendo um dos mais populares e versáteis do mundo.</p>
+            <div class="botoes-acao">
+                <button class="btn-som" onclick="tocarNota('violao')">🎵 Som</button>
+            </div>
         </div>
 
         <!-- Bateria -->
-        <div class="instrumento-card">
+        <div class="bloco">
             <img src="https://unsplash.com" alt="Bateria">
-            <h2>Bateria</h2>
-            <p>O coração do ritmo na música moderna, combinando tambores graves e pratos metálicos vibrantes.</p>
-            <button class="botao-audio" onclick="tocarNota('bateria')">🔊 Ouvir Som</button>
+            <h3>Bateria</h3>
+            <p>Conjunto complexo de tambores e pratos metálicos responsáveis pelo ritmo e tempo musical.</p>
+            <div class="botoes-acao">
+                <button class="btn-som" onclick="tocarNota('bateria')">🎵 Som</button>
+            </div>
         </div>
-    </main>
+    </div>
 
+    <!-- Scripts de Interatividade -->
     <script>
-        // FUNÇÃO DO TEMA: Liga e desliga a classe 'tema-escuro' no <body> a cada clique
+        // FUNÇÃO DO TEMA: Liga e desliga a classe 'tema-escuro' no <body> a cada clique de forma definitiva
         function alternarTema() {
             document.body.classList.toggle('tema-escuro');
         }
@@ -245,31 +281,5 @@
                     oscilador.type = 'sine';
                     oscilador.frequency.setValueAtTime(85, agora); // Som grave e percussivo
                     volume.gain.setValueAtTime(0.5, agora);
-                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.25);
-                    oscilador.start(agora);
-                    oscilador.stop(agora + 0.25);
-                }
-                else if (tipo === 'flauta') {
-                    oscilador.type = 'sine';
-                    oscilador.frequency.setValueAtTime(783.99, agora); // Nota Sol aguda e pura
-                    volume.gain.setValueAtTime(0.15, agora);
-                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 1.0);
-                    oscilador.start(agora);
-                    oscilador.stop(agora + 1.0);
-                }
-                else if (tipo === 'violao') {
-                    oscilador.type = 'triangle';
-                    oscilador.frequency.setValueAtTime(146.83, agora); // Nota Ré grave
-                    volume.gain.setValueAtTime(0.3, agora);
-                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.8);
-                    oscilador.start(agora);
-                    oscilador.stop(agora + 0.8);
-                } 
-                else if (tipo === 'bateria') {
-                    oscilador.type = 'square';
-                    oscilador.frequency.setValueAtTime(130, agora); // Impacto rápido
-                    oscilador.frequency.exponentialRampToValueAtTime(10, agora + 0.1);
-                    volume.gain.setValueAtTime(0.4, agora);
-                    volume.gain.exponentialRampToValueAtTime(0.001, agora + 0.12);
 
                 
